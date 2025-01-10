@@ -3,7 +3,7 @@
 #include <WiFiClientSecure.h>
 #include <HTTPClient.h>
 #include <ModbusMaster.h>
-#include <String>
+#include <vector>
 
 #define USER "KahfiQiana"
 #define PASS "nrdyxfebv2zs6w6"
@@ -13,8 +13,10 @@ using namespace std;
 #define PIN_RX 16
 #define PIN_TX 17
 
-String accessToken = "e7AFg5EdxNEQN2UsfQbZ";
+String accessToken = "ghiYDUkC9lN3BVovX4mY";
 String url = "https://demo.thingsboard.io/api/v1/"+ accessToken + "/telemetry";
+
+//https://demo.thingsboard.io/api/v1/e7AFg5EdxNEQN2UsfQbZ/telemetry
 
 ModbusMaster modbusMaster;
 
@@ -23,8 +25,6 @@ uint16_t dataInfo[2];
 
 float dataTemp = 0.0, dataHum = 0.0;
 String strTemp, strHum;
-
-vector<String> mydata;
 
 void connectWifi ( String ssid, String pass )
 {
@@ -54,6 +54,7 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   WiFiClientSecure *client = new WiFiClientSecure;
+  vector<String> mydata;
 
   if (client)
   {
@@ -84,6 +85,8 @@ void loop() {
     Serial.print("[HTTPS] begin --> ");
     https.begin ( *client, url );
     String httpsBody = "{\"temperature\":"+ mydata[0] + ",\"humidity\":"+ mydata[1] +"}";
+    
+    //String httpsBody = "{\"temperature\":"+ String(54.00) + ",\"humidity\":"+ String(94.70) +"}";
     int httpsResponseCode = https.POST ( httpsBody );
 
     Serial.print ("HTTPS Response code: ");

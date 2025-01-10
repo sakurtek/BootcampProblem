@@ -16,8 +16,6 @@ using namespace std;
 String accessToken = "e7AFg5EdxNEQN2UsfQbZ";
 String url = "https://demo.thingsboard.io/api/v1/"+ accessToken + "/telemetry";
 
-//https://demo.thingsboard.io/api/v1/e7AFg5EdxNEQN2UsfQbZ/telemetry
-
 ModbusMaster modbusMaster;
 
 uint8_t result;
